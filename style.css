@@ -1,3 +1,4 @@
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -5,61 +6,66 @@
   font-family: 'Roboto', sans-serif;
 }
 
+/* VARIÁVEIS */
 :root {
   --text-color: rgb(15, 93, 189);
   --bg-url: #0a0a0a;
   --stroke-color: rgba(15, 93, 189, 0.5);
   --surface-color: rgba(15, 93, 189, 0.05);
-  --surface-color-hover: rgba(0, 0, 0, 0.02);
   --highlight-color: rgba(15, 93, 189, 0.2);
   --switch-bg-url: url(./assets/moon-stars.svg);
 }
 
+/* TEMA CLARO */
 .light {
   --text-color: rgb(15, 44, 87);
   --bg-url: #c2c2c2;
   --stroke-color: rgba(15, 44, 87, 0.5);
   --surface-color: rgba(15, 44, 87, 0.05);
-  --surface-color-hover: rgba(0, 0, 0, 0.02);
   --highlight-color: rgba(15, 44, 87, 0.1);
   --switch-bg-url: url(./assets/sun.svg);
 }
 
-body{
+/* BODY */
+body {
   background: var(--bg-url);
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-block: 80px;
+  padding: 40px 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-header{
+/* HEADER */
+header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   margin-bottom: 30px;
 }
 
 header img {
-  height:320px;
-  width: 300px;
+  height: 180px;
+  width: 180px;
   border-radius: 50%;
   padding: 5px;
   border: 2px solid var(--text-color);
+  object-fit: cover;
 }
 
 header p {
   margin-block: 15px;
   color: var(--text-color);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
 }
 
+/* SWITCH */
 #switch {
   position: relative;
   width: 64px;
@@ -78,16 +84,10 @@ header p {
   left: 0;
   z-index: 1;
   transform: translateY(-50%);
-
-  animation: slide-back 0.2s;
 }
 
 .light #switch button {
-  animation: slide-in 0.2s forwards;
-}
-
-#switch button:hover {
-  outline: 8px solid var(--highlight-color);
+  left: 50%;
 }
 
 #switch span {
@@ -96,51 +96,105 @@ header p {
   height: 24px;
   background: var(--surface-color);
   border: 1px solid var(--text-color);
-  backdrop-filter: blur(4px); 
-  -webkit-backdrop-filter: blur(4px);
   border-radius: 9999px;
 }
 
+/* LINKS */
 .links {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  gap: 15px;
 }
 
 .link {
   color: var(--text-color);
   font-weight: 500;
-  margin-bottom: 15px;
-  padding: 15px 140px;
+  padding: 15px;
   border: 2px solid var(--text-color);
-  border-radius: 4px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  transition: 0.2s;
 }
 
-.link ion-icon{
-  font-size: 20px;
+.link:hover {
+  background: var(--surface-color);
 }
 
-.link > span{
-  margin-left: 8px;
-}
-
-
-@keyframes slide-in {
-  from {
-    left: 0;
+/* RESPONSIVIDADE */
+@media (min-width: 600px) {
+  header img {
+    height: 250px;
+    width: 250px;
   }
-  to {
-    left: 50%;
-  }
-}
-
-@keyframes slide-back {
-  from {
-    left: 50%;
-  }
-  to {
-    left: 0;
+  .link {
+    padding: 18px;
+    font-size: 18px;
   }
 }
+
+/* CURSOR LIGHT */
+.cursor-light {
+  position: fixed;
+  width: 350px;
+  height: 350px;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.7;
+  transition: background 0.3s;
+}
+
+.cursor-light.dark {
+  background: rgba(15, 93, 189, 0.6);
+}
+
+.cursor-light.light {
+  background: rgba(15, 44, 87, 0.3);
+}
+
+/* PARALLAX BG */
+.parallax-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -10;
+}
+
+.layer {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  top: -25%;
+  left: -25%;
+  transition: transform 0.1s linear;
+  pointer-events: none;
+}
+
+.layer1 {
+  background: radial-gradient(circle at 20% 30%, rgba(15, 93, 189, 0.5), transparent 60%);
+  filter: blur(80px);
+}
+
+.layer2 {
+  background: radial-gradient(circle at 80% 70%, rgba(15, 44, 87, 0.6), transparent 60%);
+  filter: blur(110px);
+}
+
+.layer3 {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 70%);
+  opacity: 0.3;
+  filter: blur(140px);
+} 
+
+
+
+
+
+
